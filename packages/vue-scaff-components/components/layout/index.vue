@@ -12,7 +12,7 @@
     <!-- Aside -->
     <vs-aside :space="space" header-space="60" :logo="app.meta.logo" :title="app.meta.title" :sub-title="app.meta.subTitle">
       <!-- Toper -->
-      <slot name="toper" />
+      <slot name="toper" v-if="$slots.toper" />
 
       <!-- Customer -->
       <slot name="navigator" :routes="routers" v-if="$slots.navigator" />
@@ -20,7 +20,8 @@
       <!-- Navigator -->
       <vs-navigator :routes="routers" v-else />
 
-      <div>199</div>
+      <!-- Footer -->
+      <slot name="footer" v-if="$slots.footer" />
     </vs-aside>
 
     <!-- Container -->

@@ -1,5 +1,3 @@
-console.log(1)
-
 // Context for Vite
 const context = import.meta.globEager(`./components/**/*.vue`);
 
@@ -7,7 +5,6 @@ const context = import.meta.globEager(`./components/**/*.vue`);
 export default {
   // For Usage
   install(Vue) {
-    console.log(500);
     // Set Components
     const components = {};
 
@@ -22,8 +19,6 @@ export default {
 
       // Get Name
       const name = component.name || key.replace(/\S+?\/|\.vue$/g, '');
-
-      console.log(name, component);
 
       // Set Components
       components[name] = component;
