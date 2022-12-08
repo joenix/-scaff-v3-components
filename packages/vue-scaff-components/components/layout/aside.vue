@@ -65,9 +65,9 @@
         </vs-flex>
       </template>
     </vs-flex>
-    <div class="aside--container">
+    <vs-flex direction="col" class="aside--container">
       <slot />
-    </div>
+    </vs-flex>
   </vs-flex>
 </template>
 
