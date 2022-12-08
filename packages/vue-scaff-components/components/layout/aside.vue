@@ -2,7 +2,7 @@
 .aside {
   transition: all @duration;
 
-  color: @aside-color-active;
+  color: @aside-color-font;
   background-color: @aside-color-background;
   width: @aside-space;
 

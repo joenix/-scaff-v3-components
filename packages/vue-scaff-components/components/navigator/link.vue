@@ -62,7 +62,7 @@
   }
 
   &.active {
-    color: @aside-color-background;
+    color: @aside-color-bar-active;
 
     &:after {
       width: 100%;

@@ -6,7 +6,7 @@
 
 <template>
   <div class="navigator">
-    <vs-navigator-group v-for="(group, index) in routers" :route="group" :minify="app.minify">
+    <vs-navigator-group v-for="(group, index) in routes" :route="group" :minify="app.minify">
       <template v-slot="{ children }">
         <vs-navigator-menu :group="children" />
       </template>
@@ -34,12 +34,6 @@ export default {
     routes: {
       type: [Array],
       default: [],
-    },
-  },
-
-  computed: {
-    routers() {
-      return this.routes.filter(({ hidden }) => hidden !== true).sort((a, b) => a.meta.index - b.meta.index);
     },
   },
 };
