@@ -10,11 +10,11 @@
 <template>
   <vs-flex class="app">
     <!-- Aside -->
-    <vs-aside :space="space" header-space="60" :logo="app.meta.logo" :title="app.meta.title" :sub-title="app.meta.subTitle">
-      <!-- Toper -->
-      <slot name="toper" v-if="$slots.toper" />
+    <vs-aside :space="space" toper-space="60" :logo="app.meta.logo" :title="app.meta.title" :sub-title="app.meta.subTitle">
+      <!-- Chief -->
+      <slot name="chief" v-if="$slots.chief" />
 
-      <!-- Customer -->
+      <!-- Custom Navigator -->
       <slot name="navigator" :routes="routers" v-if="$slots.navigator" />
 
       <!-- Navigator -->
@@ -28,7 +28,11 @@
     <vs-flex flex="1" direction="col">
       <!-- Header -->
       <vs-header space="60">
-        <vs-flex align="center">
+        <!-- Custom Header -->
+        <slot name="header" :routes="$route.matched" v-if="$slots.header" />
+
+        <!-- Header -->
+        <vs-flex align="center" v-else>
           <!-- Switch -->
           <vs-switch />
 
@@ -38,8 +42,15 @@
 
         <!-- Avatar -->
         <div slot="right">
+          <!-- Custom Avatar -->
+          <slot v-if="$slots.avatar" />
+
           <!-- Avatar -->
-          <vs-avatar size="48" :src="app.meta.avatar" />
+          <a-dropdown v-else>
+            <vs-avatar size="48" :src="app.meta.avatar" />
+
+            <template #overlay> 1 </template>
+          </a-dropdown>
         </div>
       </vs-header>
 

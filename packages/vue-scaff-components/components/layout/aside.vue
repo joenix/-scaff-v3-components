@@ -6,7 +6,7 @@
   background-color: @aside-color-background;
   width: @aside-space;
 
-  &--header {
+  &--toper {
     overflow: hidden;
 
     background-color: @aside-color-deep;
@@ -38,13 +38,13 @@
 
   &--container {
     overflow-y: auto;
-    height: calc(100vh - @aside-space-header);
+    height: calc(100vh - @aside-space-toper) !important;
   }
 
   &.minify {
     width: @aside-space-minify !important;
 
-    .aside--header--content {
+    .aside--toper--content {
       display: none;
     }
   }
@@ -53,15 +53,15 @@
 
 <template>
   <vs-flex class="aside" :class="{ minify: app.minify }" direction="col" :width="space">
-    <vs-flex class="aside--header" :height="headerSpace" v-if="$slots.header || logo || title">
-      <slot name="header" v-if="$slots.header" />
+    <vs-flex class="aside--toper" :height="toperSpace" v-if="$slots.toper || logo || title">
+      <slot name="toper" v-if="$slots.toper" />
       <template v-else>
-        <div class="aside--header--logo" v-if="logo">
+        <div class="aside--toper--logo" v-if="logo">
           <img :src="logo" />
         </div>
-        <vs-flex class="aside--header--content" flex="1" direction="col" justify="center" v-if="title || subTitle">
-          <div class="aside--header--title">{{ title }}</div>
-          <div class="aside--header--subTitle">{{ subTitle }}</div>
+        <vs-flex class="aside--toper--content" flex="1" direction="col" justify="center" v-if="title || subTitle">
+          <div class="aside--toper--title">{{ title }}</div>
+          <div class="aside--toper--subTitle">{{ subTitle }}</div>
         </vs-flex>
       </template>
     </vs-flex>
@@ -81,7 +81,7 @@ export default {
       default: 200,
     },
 
-    headerSpace: {
+    toperSpace: {
       type: [String, Number],
       default: 60,
     },

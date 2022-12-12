@@ -14,6 +14,7 @@
     </span>
 
     <a-modal v-model:visible="view" :title="title" :cancel-text="cancelText" :ok-text="successText" @ok="success">
+      <template #footer v-if="noControl" />
       <slot />
     </a-modal>
   </div>
@@ -42,6 +43,11 @@ export default {
     title: {
       type: [String],
       default: 'Popup',
+    },
+
+    noControl: {
+      type: [Boolean],
+      default: false,
     },
 
     successText: {

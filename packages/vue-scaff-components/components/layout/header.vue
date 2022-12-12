@@ -2,6 +2,7 @@
 .header {
   padding: 0 @unit;
   border-bottom: 1px solid @shallow;
+  background-color: @white;
 }
 </style>
 

@@ -20,16 +20,22 @@
   &-main {
     overflow: hidden;
   }
+
+  &.reverse {
+    .land-ware {
+      float: right;
+    }
+  }
 }
 </style>
 
 <template>
-  <div class="land">
+  <div class="land" :class="{ reverse }">
     <div class="land-ware" :style="{ minWidth: `${+space}px` }">
       <slot name="ware" />
     </div>
 
-    <div class="land-main" :style="{ marginLeft: `${+space + +gap}px` }">
+    <div class="land-main" :style="{ [reverse ? 'marginRight' : 'marginLeft']: `${+space + +gap}px` }">
       <slot />
     </div>
   </div>
@@ -40,6 +46,11 @@ export default {
   name: 'vs-land',
 
   props: {
+    reverse: {
+      type: [Boolean],
+      default: false,
+    },
+
     space: {
       type: [Number, String],
       default: 200,
