@@ -10,6 +10,8 @@
 
   &-ware,
   &-main {
+    overflow: hidden;
+    transition: all @duration;
   }
 
   &-ware {
@@ -18,7 +20,6 @@
   }
 
   &-main {
-    overflow: hidden;
   }
 
   &.reverse {
@@ -31,11 +32,11 @@
 
 <template>
   <div class="land" :class="{ reverse }">
-    <div class="land-ware" :style="{ minWidth: `${+space}px` }">
+    <div class="land-ware" :style="{ width: `${room}px` }">
       <slot name="ware" />
     </div>
 
-    <div class="land-main" :style="{ [reverse ? 'marginRight' : 'marginLeft']: `${+space + +gap}px` }">
+    <div class="land-main" :style="{ [reverse ? 'marginRight' : 'marginLeft']: `${room + +gap}px` }">
       <slot />
     </div>
   </div>
@@ -46,6 +47,11 @@ export default {
   name: 'vs-land',
 
   props: {
+    visible: {
+      type: [Boolean],
+      default: true,
+    },
+
     reverse: {
       type: [Boolean],
       default: false,
@@ -59,6 +65,12 @@ export default {
     gap: {
       type: [Number, String],
       default: 0,
+    },
+  },
+
+  computed: {
+    room() {
+      return this.visible ? +this.space : 0;
     },
   },
 };

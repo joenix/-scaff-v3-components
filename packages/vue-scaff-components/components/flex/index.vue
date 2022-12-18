@@ -40,6 +40,11 @@ export default {
       default: 'none',
     },
 
+    gap: {
+      type: [String, Number],
+      default: 0,
+    },
+
     width: {
       type: [String, Number],
       default: 'auto',
@@ -79,6 +84,7 @@ export default {
         flex: `${this.flex}`,
         width: /^\d+$/.test(this.width) ? `${this.width}px` : this.width,
         height: /^\d+$/.test(this.height) ? `${this.height}px` : this.height,
+        gap: `${this.gap}px`,
       };
     },
   },

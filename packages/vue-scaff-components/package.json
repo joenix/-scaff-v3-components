@@ -1,6 +1,9 @@
 {
   "name": "vue-scaff-components",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }

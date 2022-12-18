@@ -1,30 +1,31 @@
 // Context for Vite
 const context = import.meta.globEager(`./components/**/*.vue`);
 
+// Catcher
+function catcher(context, exp, callback) {
+  // Foreach
+  for (const key in context) {
+    // Has Property
+    if (!Object.prototype.hasOwnProperty.call(context, key)) {
+      continue;
+    }
+
+    // Get Module
+    const module = context[key].default;
+
+    // Get Name
+    const name = (module.name || key).replace(exp, '');
+
+    // Set into Callback
+    callback(module, name.replace(/\-([a-zA-Z])/g, ($0, $1) => $1.toUpperCase()).replace(/\d+$/, ''));
+  }
+}
+
 // Export for Usage
 export default {
   // For Usage
   install(Vue) {
-    // Set Components
-    const components = {};
-
-    // Foreach Context
-    for (const key in context) {
-      if (!Object.prototype.hasOwnProperty.call(context, key)) {
-        continue;
-      }
-
-      // Get Component
-      const component = context[key].default;
-
-      // Get Name
-      const name = component.name || key.replace(/\S+?\/|\.vue$/g, '');
-
-      // Set Components
-      components[name] = component;
-
-      // Install in Component
-      Vue.component(name, component);
-    }
+    // Registy Components
+    catcher(context, /\S+?\/|\.vue$/g, (component, name) => Vue.component(name, component));
   },
 };

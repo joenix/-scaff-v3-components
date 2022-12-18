@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import { cloneDeep, forEach } from 'lodash';
+
 export default {
   name: 'bs-query',
 
@@ -20,11 +22,12 @@ export default {
 
   watch: {
     source: {
-      handler(value) {
+      handler(json) {
         if (!this.ripe) {
-          this.ripe = (Object.assign(value, this.$route.query), true);
+          this.ripe = Object.assign(json, this.$route.query);
         }
-        this.$router.replace({ query: this.catcher(value) }).finally(() => (this.respondToRouteChanges = true));
+
+        this.$router.replace({ query: this.catcher(json) }).finally(() => (this.respondToRouteChanges = true));
       },
 
       deep: true,
@@ -33,14 +36,23 @@ export default {
   },
 
   methods: {
-    catcher(origin, target = {}) {
-      this.sync.forEach(key => {
-        if (origin[key] !== undefined) {
-          target[key] = origin[key];
-        }
-      });
+    // Encode: { array } => { string }
+    encode(value) {
+      return value.join(',');
+    },
 
-      return target;
+    // Decode: { string } => { array }
+    decode(value) {
+      return /\w{1,}\,/.test(value) ? value.split(',') : value;
+    },
+
+    // Catcher Cloner
+    catcher(origin, cloner = {}) {
+      // No Sync as All
+      this.sync.length ? this.sync.forEach((item, key) => (cloner[key] = origin[key])) : (cloner = origin);
+
+      // Usage as Cloner
+      return cloneDeep(cloner);
     },
   },
 };
