@@ -89,9 +89,5 @@ export default {
       this.$router.replace({ name: 'login' });
     }
   },
-
-  async created() {
-    await this.$store.dispatch('AUTH_LOGIN', { username: 'test1', password: '123456' });
-  },
 };
 </script>

@@ -6,7 +6,7 @@
 
   &:after {
     clear: both;
-  }
+  }hb 
 
   &-ware,
   &-main {

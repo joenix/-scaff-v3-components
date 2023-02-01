@@ -7,7 +7,7 @@
 </style>
 
 <template>
-  <a-drawer class="drawer" v-model:visible="visual" placement="right" :size="size" :width="width" :title="title" @close="closeHandle" @after-visible-change="visibleHandle">
+  <a-drawer class="drawer" v-model:visible="visual" placement="right" :size="size" :width="width" :header-style="style.header" :footer-style="style.footer" :body-style="style.body" :title="title" @close="closeHandle" @after-visible-change="visibleHandle">
     <template #extra>
       <slot name="affix" />
     </template>
@@ -42,6 +42,11 @@ export default {
     size: {
       type: [String, Number],
       default: 'full',
+    },
+
+    style: {
+      type: [Object],
+      default: {},
     },
   },
 

@@ -1,10 +1,15 @@
 <template>
   <div class="table">
     <!-- Lister -->
-    <a-table v-if="source.length" :row-key="selectionOptions.rowKey" :row-selection="{ ...selectionOptions }" :columns="headers" :dataSource="source" :pagination="pagination">
+    <a-table v-if="source.length" :row-key="selectionOptions.rowKey" :row-selection="{ ...selectionOptions }" :columns="headers" :dataSource="source" :pagination="pagination" :scroll="{ x: 'calc(480px + 50%)' }">
       <template #bodyCell="{ column, record, index }">
         <!-- Slots Operation -->
         <slot name="operation" v-if="column.dataIndex === `operation`" :data="record" :index="index" />
+        <!-- Slots File Url -->
+        <template v-else-if="column.dataIndex === `fileUrl`">
+          <a-image :width="180" :src="record.fileUrl" v-if="record.filrUrl" />
+          <file-image-outlined :style="{ fontSize: `48px`, color: `#555` }" v-else />
+        </template>
         <!-- Slots Column -->
         <slot name="column" v-else :header="column" :data="record" :index="index" />
       </template>
