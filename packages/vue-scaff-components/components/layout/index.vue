@@ -86,10 +86,6 @@ export default {
 
   beforeMount() {
     if (this.certification && !this.app.token) {
-      // location.href = location.origin + '/#/login';
-      // location.reload();
-
-      // A Bug
       this.$router.push({ name: 'login', replace: true });
     }
   },
