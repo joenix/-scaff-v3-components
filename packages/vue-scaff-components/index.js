@@ -1,7 +1,5 @@
 // Context for Vite
-const context = import.meta.globEager(`./components/**/*.vue`);
-
-console.log('?????', context);
+const context = import.meta.glob(`./components/**/*.vue`, { eager: true, query: '?inline' });
 
 // Catcher
 function catcher(context, exp, callback) {
@@ -15,12 +13,8 @@ function catcher(context, exp, callback) {
     // Get Module
     const module = context[key].default;
 
-    console.log('module:', module);
-
     // Get Name
     const name = (module.name || key).replace(exp, '');
-
-    console.log('name:', name);
 
     // Set into Callback
     callback(module, name.replace(/\-([a-zA-Z])/g, ($0, $1) => $1.toUpperCase()).replace(/\d+$/, ''));
