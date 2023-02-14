@@ -65,7 +65,7 @@ export default {
 
       // Auto create Headers from  Source
       const headers = this.$util.foreach(this.source[0], (value, key, index) => {
-        return { title: key, dataIndex: key, key };
+        return { title: this.$t(key), dataIndex: key, key };
       });
 
       // Mode MERGE
@@ -82,7 +82,7 @@ export default {
         headers.operation = {
           dataIndex: 'operation',
           key: 'operation',
-          title: 'operation',
+          title: this.$t('operation'),
         };
       }
 
