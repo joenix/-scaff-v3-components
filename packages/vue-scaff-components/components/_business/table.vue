@@ -7,7 +7,7 @@
         <slot name="operation" v-if="column.dataIndex === `operation`" :data="record" :index="index" />
         <!-- Slots File Url -->
         <template v-else-if="column.dataIndex === `fileUrl`">
-          <a-image :width="180" :src="record.fileUrl" v-if="record.filrUrl" />
+          <a-image :width="180" :src="record.fileUrl" v-if="record.fileUrl" />
           <file-image-outlined :style="{ fontSize: `48px`, color: `#555` }" v-else />
         </template>
         <!-- Slots Column -->
