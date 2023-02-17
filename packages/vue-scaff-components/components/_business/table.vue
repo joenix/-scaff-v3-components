@@ -1,7 +1,7 @@
 <template>
   <div class="table">
     <!-- Lister -->
-    <a-table v-if="source.length" :row-key="selectionOptions.rowKey" :row-selection="{ ...selectionOptions }" :columns="headers" :dataSource="source" :pagination="pagination" :scroll="{ x: 'calc(60% + 800px)' }">
+    <a-table v-if="source.length" :row-key="selectionOptions.rowKey" :row-selection="{ ...selectionOptions, fixed: true }" :columns="headers" :dataSource="source" :pagination="pagination" :scroll="{ x: 'calc(60% + 800px)' }">
       <template #bodyCell="{ column, record, index }">
         <!-- Slots Operation -->
         <slot name="operation" v-if="column.dataIndex === `operation`" :data="record" :index="index" />
@@ -87,7 +87,7 @@ export default {
 
       // File URL
       if (headers.fileUrl) {
-        Object.assign(headers.fileUrl, { width: this.image.width + 32, fixed: 'left' })
+        Object.assign(headers.fileUrl, { width: this.image.width + 32 })
       }
 
       // Slots Operation
