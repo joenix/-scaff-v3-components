@@ -1,13 +1,13 @@
 <template>
   <div class="table">
     <!-- Lister -->
-    <a-table v-if="source.length" :row-key="selectionOptions.rowKey" :row-selection="{ ...selectionOptions }" :columns="headers" :dataSource="source" :pagination="pagination" :scroll="{ x: 'calc(480px + 50%)' }">
+    <a-table v-if="source.length" :row-key="selectionOptions.rowKey" :row-selection="{ ...selectionOptions }" :columns="headers" :dataSource="source" :pagination="pagination" :scroll="{ x: 'calc(60% + 800px)' }">
       <template #bodyCell="{ column, record, index }">
         <!-- Slots Operation -->
         <slot name="operation" v-if="column.dataIndex === `operation`" :data="record" :index="index" />
         <!-- Slots File Url -->
         <template v-else-if="column.dataIndex === `fileUrl`">
-          <a-image :width="180" :src="record.fileUrl" v-if="record.fileUrl" />
+          <a-image :width="image.width" :height="image.height" :src="record.fileUrl" v-if="record.fileUrl" />
           <file-image-outlined :style="{ fontSize: `48px`, color: `#555` }" v-else />
         </template>
         <!-- Slots Column -->
@@ -54,6 +54,14 @@ export default {
       type: [Object],
       default: {},
     },
+
+    image: {
+      type: [Object],
+      default: {
+        width: 120,
+        height: 160,
+      }
+    }
   },
 
   computed: {
@@ -65,7 +73,7 @@ export default {
 
       // Auto create Headers from  Source
       const headers = this.$util.foreach(this.source[0], (value, key, index) => {
-        return { title: this.$t(key), dataIndex: key, key };
+        return { title: this.$t(key), dataIndex: key, key, ellipsis: true };
       });
 
       // Mode MERGE
@@ -77,12 +85,18 @@ export default {
         });
       }
 
+      // File URL
+      if (headers.fileUrl) {
+        Object.assign(headers.fileUrl, { width: this.image.width + 32, fixed: 'left' })
+      }
+
       // Slots Operation
       if (this.$slots.operation) {
         headers.operation = {
           dataIndex: 'operation',
           key: 'operation',
           title: this.$t('operation'),
+          fixed: 'right'
         };
       }
 
